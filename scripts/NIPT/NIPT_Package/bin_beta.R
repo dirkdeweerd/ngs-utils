@@ -12,15 +12,11 @@ library(Rsamtools)
 bin.bed.sample <- function (bed.filepath, bin.size = 50000)
 {
   col.names = c("chrom", "startpos", "stoppos", "readname", "score", "strand")
-  bin.size = 50000
   
-  reads.data.frame <- fread(input = sample.filepath, header = F, verbose = F,
+  reads.data.frame <- fread(input = bed.filepath, header = F, verbose = F,
                             sep = "\t")
-  
-  setnames(x = sample, col.names)
-  
+  setnames(x = reads.data.frame, col.names)
   bin <- bin.reads(reads.data.frame = reads.data.frame, bin.size = bin.size)
-  
   return(bin)
 }
 
@@ -53,8 +49,7 @@ bin.bam.sample <- function(bam.filepath, bin.size = 50000, do.sort=FALSE, separa
   {
     reads.list <- list(reads.data.frame)
   }
-  
-  bin <- lapply(X = reads.list, FUN = bin.reads, bin.size = bin.size)
+  bin <- list(reads = lapply(X = reads.list, FUN = bin.reads, bin.size = bin.size), samplename = basename(sub("^([^.]*).*", "\\1", bam.filepath)))
   
   return(bin)
 }
@@ -67,7 +62,7 @@ bin.reads <- function(reads.data.frame, bin.size)
   for (chromo in 1:length(chromos[[1]]))
   {
     max.read <- (max.read -1)+ chromos[[1]][chromo] 
-    reads <- sapply(X = unique(c(reads.data.frame$strand, reads.data.frame$startpos[min.read:max.read])),  
+    reads <- sapply(X = unique(reads.data.frame[min.read:max.read,], MARGIN = 2)$startpos,  
                     FUN =  getbins, bin.size=bin.size)
     min.read <- max.read
     bins <- tabulate(reads, nbins = 4985)
