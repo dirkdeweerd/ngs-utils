@@ -1,19 +1,17 @@
-ChromosomalFractionPerSample = function(bins)
+chrfractions <- function(binned.sample)
 {
-  chr.frac = NULL
-  if (length(bins) == 2)
-  {
-    bins.fwd <- bins[[1]]
-    bins.rev <- bins[[2]]
-    chr.frac.fwd = rowSums(bins.fwd) / sum(bins.fwd) / 2
-    chr.frac.rev = rowSums(bins.rev) / sum(bins.rev) / 2
-    chr.frac = rbind(chr.frac, c(chr.frac.fwd, chr.frac.rev))
+  if(is.null(attr(binned.sample, "class"))){
+    print("Object is not of type Sample")
   }
-  else
-  {
-    bins.all <- bins[[1]]
-    chr.frac.all = rowSums(bins.all) / sum(bins.all)
-    chr.frac = rbind(chr.frac, chr.frac.all)
-  }
-  return(chr.frac)
+  else  UseMethod("chrfractions", binned.sample)
+}
+
+chrfractions.SeparatedStrands <- function(binned.sample)
+{
+ unlist(lapply(X = binned.sample$reads, FUN = function(x) (rowSums(x) / sum(x)) / 2))
+}
+
+chrfractions.CombinedStrands <- function(binned.sample)
+{
+  unlist(lapply(X = binned.sample$reads, FUN = function(x) (rowSums(x) / sum(x)) / 2))
 }
