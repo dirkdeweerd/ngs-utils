@@ -13,5 +13,7 @@ chrfractions.SeparatedStrands <- function(binned.sample)
 
 chrfractions.CombinedStrands <- function(binned.sample)
 {
-  unlist(lapply(X = binned.sample$reads, FUN = function(x) (rowSums(x) / sum(x)) / 2))
+  unlist(lapply(X = binned.sample$reads, FUN = function(x) (rowSums(x) / sum(x))))
 }
+
+samplelist_gc_corrected <- lapply(samplelist, gc.correct)

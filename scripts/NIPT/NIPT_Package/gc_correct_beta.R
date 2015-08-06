@@ -21,7 +21,7 @@ gc.correct.SeparatedStrands <- function(binned.sample, span = 0.75)
   sample <- Reduce("+", binned.sample$reads)
   indices <- which(gc.percentages > 0 & sample > 0)
   correction.factor <- GetCorrectionFactor(sample = as.vector(sample[indices]), span = span, gc.percentages = as.vector(gc.percentages[indices]))
-  corrected.sample <- construct.sample(reads = lapply(X = binned.sample$reads, FUN= correct.reads, correction.factor, indices), name = binned.sample$name)
+  corrected.sample <- construct_sample(reads = lapply(X = binned.sample$reads, FUN= correct.reads, correction.factor, indices), name = binned.sample$name)
   return(corrected.sample)
 }
 
@@ -30,6 +30,6 @@ gc.correct.CombinedStrands <- function(binned.sample, span = 0.75)
   sample <- Reduce("+", binned.sample$reads)
   indices <- which(gc.percentages > 0 & sample > 0)
   correction.factor <- GetCorrectionFactor(sample = as.vector(sample[indices]), span = span, gc.percentages = as.vector(gc.percentages[indices]))
-  corrected.sample <- construct.sample(reads = lapply(X = binned.sample$reads, FUN= correct.reads, correction.factor, indices), name = binned.sample$name)
+  corrected.sample <- construct_sample(reads = lapply(X = binned.sample$reads, FUN= correct.reads, correction.factor, indices), name = binned.sample$name)
   return(corrected.sample)
 }
