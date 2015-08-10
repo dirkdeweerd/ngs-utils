@@ -9,7 +9,7 @@ library(Rsamtools)
     do.call(c, x)
   }
 }
-bin.bed.sample <- function (bed.filepath, bin.size = 50000)
+bin.bed.sample <- function (bed.filepath)
 {
   col.names = c("chrom", "startpos", "stoppos", "readname", "score", "strand")
   
@@ -20,7 +20,7 @@ bin.bed.sample <- function (bed.filepath, bin.size = 50000)
   return(bin)
 }
 
-bin.bam.sample <- function(bam.filepath, bin.size = 50000, do.sort=FALSE, separate.strands=FALSE)
+bin.bam.sample <- function(bam.filepath, do.sort=FALSE, separate.strands=FALSE)
 {
   if (do.sort == TRUE)
   {

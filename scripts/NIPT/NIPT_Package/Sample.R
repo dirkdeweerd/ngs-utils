@@ -6,7 +6,6 @@ construct_sample <- function(reads, name)
     rownames(reads[[1]]) <- as.character(1:22)
     type = "CombinedStrands"
   }
-  
   if(length(reads) == 2)
   {
     rownames(reads[[1]]) <- paste0(1:22, "F")

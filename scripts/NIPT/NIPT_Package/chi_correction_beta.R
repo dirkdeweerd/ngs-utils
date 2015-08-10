@@ -17,8 +17,8 @@ correctsamples <- function(nipt_sample, chisumbins, degrees_of_freedom){
 correctbins = function(bins, chisumbins, degrees_of_freedom) {
   chi_sum_bins_normalized = (chisumbins - degrees_of_freedom) / (sqrt( 2 * degrees_of_freedom))
   chi_sum_bins_correction_factor = as.matrix(chisumbins / degrees_of_freedom)
-  index = which(chi_square_cut_off < chi_sum_bins_normalized) # Variation between these bins is considered too large
-  bins[index] <- bins[index] / chi_sum_bins_correction_factor[index] # Therefore, we correct them here
+  index = which(chi_square_cut_off < chi_sum_bins_normalized) 
+  bins[index] <- bins[index] / chi_sum_bins_correction_factor[index] 
   return(bins) 
 }
 chicorrect <- function(nipt_sample, control_samples){
@@ -27,5 +27,5 @@ chicorrect <- function(nipt_sample, control_samples){
   chisumbins = sumchiscores(bins_list = controlbins)
   correctedcontrolsamples <- lapply(X = control_samples, FUN = correctsamples, chisumbins = chisumbins, degrees_of_freedom = degrees_of_freedom)
   correctedsample <- correctsamples(nipt_sample = nipt_sample, chisumbins = chisumbins, degrees_of_freedom = degrees_of_freedom)
-  return (list(correctedsample, correctedcontrolsamples))
+  return (list(sample = correctedsample, control_group = correctedcontrolsamples))
 }
