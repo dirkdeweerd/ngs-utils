@@ -15,3 +15,8 @@ as_control_group <- function(nipt_samples, control_group_type = generic_control_
   class(control_group) <- c("Control Group", unique(sapply(nipt_samples, getstrandtype)))
   return(control_group)
 }
+
+remove_sample <- function(samplename, nipt_control_group){
+  indices <- grep(pattern = samplename, x = sapply(nipt_control_group$Samples, getsamplenames))
+  as_control_group(nipt_control_group$Samples[-indices])
+}

@@ -57,6 +57,16 @@ retrieve_fractions_of_interest.SeparatedStrands <- function(nipt_sample, chromo_
   chromosomal_fracs[paste0(chromo_focus, "F"),] + chromosomal_fracs[paste0(chromo_focus, "R"), ]
 }
 
+setrownamesmatrix <- function(nipt_matrix){
+  if (nrow(nipt_matrix) == 22){
+    print(class(nipt_matrix))
+    rownames(nipt_matrix) <- rownames_combined_autosomal
+  }
+  if (nrow(nipt_matrix) == 44){
+    rownames(nipt_matrix) <- c(rownames_separated_forward_autosomal, rownames_separated_reverse_autosomal)
+  }
+  return (nipt_matrix)
+}
 getsamplenames <- function(nipt_sample){
   nipt_sample$name
 }

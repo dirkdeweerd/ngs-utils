@@ -24,7 +24,10 @@ GetNextPredictor <- function(samples, frac_reads_chr_trisomy_observed, predictor
   return(predictor.adj.r.squared)
 }
 perform_regression <- function(nipt_sample, control_group, chromo_focus){
-  chromosomal_frac_control <- sapply(X = control_group, FUN = chrfractions)
+  chromosomal_frac_control <<- sapply(X = control_group$Samples, FUN = chrfractions)
+  print(nrow(chromosomal_frac_control))
+  chromosomal_frac_control <- setrownamesmatrix(chromosomal_frac_control)
+  print(rownames(chromosomal_frac_control))
   frac_reads_chr_trisomy_observed <- retrieve_fractions_of_interest(nipt_sample = nipt_sample, chromo_focus = chromo_focus, 
                                                                     chromosomal_fracs = chromosomal_frac_control)
   predictor.list <- SelectModelsFixedRegressionApproach(nipt_sample = nipt_sample, chromosomal_frac_control= chromosomal_frac_control,
