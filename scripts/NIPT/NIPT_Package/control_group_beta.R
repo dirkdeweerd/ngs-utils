@@ -25,3 +25,7 @@ remove_duplicates_controlgroup <- function(nipt_control_group){
   indices <- which(duplicated(sapply(nipt_control_group$Samples, getsamplenames)))
   as_control_group(nipt_control_group$Samples[-indices])
 }
+
+add_samples_controlgroup <- function(nipt_control_group, samples_to_add){
+  as_control_group(nipt_samples = c(nipt_control_group$Samples, samples_to_add))
+}

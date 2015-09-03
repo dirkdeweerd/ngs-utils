@@ -8,6 +8,7 @@ SeparatedStrands <- 'SeparatedStrands'
 GCcorrected <- "GC corrected"
 ChiCorrected <- "Chi square corrected"
 
+setnames <- paste("Set", 1:n.models)
 
 generic_control_group <- "General control group"
 XY <- c("X", "Y")

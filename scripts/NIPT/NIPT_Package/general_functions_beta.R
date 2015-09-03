@@ -30,7 +30,7 @@ getreadscontrolgroup <- function(nipt_control_group)
 }
 
 chrfractions.SeparatedStrands <- function(nipt_sample){
- sapply(X = nipt_sample$autosomal_chromosome_reads, FUN = function(x) (rowSums(x) / sum(x)) / 2)
+  sapply(X = nipt_sample$autosomal_chromosome_reads, FUN = function(x) (rowSums(x) / sum(x)) / 2)
 }
 
 chrfractions.CombinedStrands <- function(nipt_sample){
@@ -59,7 +59,6 @@ retrieve_fractions_of_interest.SeparatedStrands <- function(nipt_sample, chromo_
 
 setrownamesmatrix <- function(nipt_matrix){
   if (nrow(nipt_matrix) == 22){
-    print(class(nipt_matrix))
     rownames(nipt_matrix) <- rownames_combined_autosomal
   }
   if (nrow(nipt_matrix) == 44){
@@ -79,7 +78,7 @@ getstrandtype <- function(nipt_sample){
   class(nipt_sample)[2]
 }
 getcontrolchromosomes.SeparatedStrands <- function(nipt_sample){
- c(paste0(control_chromosomes, "F"), paste0(control_chromosomes, "R"))
+  c(paste0(control_chromosomes, "F"), paste0(control_chromosomes, "R"))
 }
 getcontrolchromosomes.CombinedStrands <- function(nipt_sample){
   control_chromosomes

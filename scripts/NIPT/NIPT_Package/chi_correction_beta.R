@@ -23,6 +23,7 @@ correctsamples <- function(nipt_sample, chisumbins, degrees_of_freedom, chi_cuto
                    sex_reads = nipt_sample$sex_chromosome_reads, name = nipt_sample$name, 
                    correction_status_autosomal = c(nipt_sample$correction_status_autosomal, "Chi Corrected"),
                    correction_status_sex = nipt_sample$correction_status_sex)
+  
 }
 correctsamples_include_xy <- function(nipt_sample, chisumbins, degrees_of_freedom, chi_cutoff, chisumbins_xy){
   construct_sample(autosomal_reads = lapply(X = nipt_sample$autosomal_chromosome_reads, FUN = correctbins, 
@@ -35,20 +36,23 @@ correctsamples_include_xy <- function(nipt_sample, chisumbins, degrees_of_freedo
                    correction_status_sex = c(nipt_sample$correction_status_sex, "Chi Corrected"))
 }
 correctbins = function(bins, chisumbins, degrees_of_freedom, chi_cutoff){
-  chi_sum_bins_normalized = (chisumbins - degrees_of_freedom) / (sqrt( 2 * degrees_of_freedom))
+  papinho <<- chisumbins
+  chi_sum_bins_normalized <<- (chisumbins - degrees_of_freedom) / (sqrt( 2 * degrees_of_freedom))
+
   chi_sum_bins_correction_factor = as.matrix(chisumbins / degrees_of_freedom)
   index = which(chi_square_cut_off < chi_sum_bins_normalized) 
   bins[index] <- bins[index] / chi_sum_bins_correction_factor[index] 
   return(bins) 
 }
 chicorrect <- function(nipt_sample, control_samples, chi_cutoff = 3.5, include_XY = F){
-  degrees_of_freedom  = length(control_samples) - 1
+  degrees_of_freedom  = length(control_samples$Samples) - 1
   controlbins <- lapply(X = control_samples$Samples, FUN = function(x) Reduce("+", x$autosomal_chromosome_reads))
-  xy_bins <- unlist(lapply(X = control_samples$Samples, FUN = function(x) x$sex_chromosome_reads), recursive = F)
-  chisumbins = sumchiscores(bins_list = controlbins, bins_correct = controlbins)
+  xy_bins <- lapply(X = control_samples$Samples, FUN = function(x) x$sex_chromosome_reads)
+  chisumbins <<- sumchiscores(bins_list = controlbins, bins_correct = controlbins)
   if (include_XY == T){
     xy_controlbins <- lapply(xy_bins, function(x) Reduce("+", x))
     chisumbins_xy = sumchiscores(bins_list = controlbins, bins_correct = xy_controlbins)
+    papinho <<- chisumbins_xy
     correctedcontrolsamples <- lapply(X = control_samples$Samples, FUN = correctsamples_include_xy, chisumbins = chisumbins, 
                                       degrees_of_freedom = degrees_of_freedom, chi_cutoff = chi_cutoff, 
                                       chisumbins_xy = chisumbins_xy)
