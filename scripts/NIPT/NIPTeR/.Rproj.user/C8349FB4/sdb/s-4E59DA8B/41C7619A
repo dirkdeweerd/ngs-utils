@@ -1,0 +1,17 @@
+{
+    "contents" : "\nlibrary(Rsamtools)\nlibrary(sets)\n\nUncorrected <- \"Uncorrected\"\nCombinedStrands <- \"CombinedStrands\"\nSeparatedStrands <- 'SeparatedStrands'\nGCcorrected <- \"GC corrected\"\nChiCorrected <- \"Chi square corrected\"\npractical <- \"Practical_CV\"\ntheoretical <- \"Theoretical_CV\"\nzscore <- \"Z_score\"\ngeneric_control_group <- \"General control group\"\nXY <- c(\"X\", \"Y\")\ncv <- \"CV\"\nshapiro <- \"Shapiro_P_value\"\nloess <- \"LOESS\"\nbin <- \"bin\"\n\nautosomal_chromosome_reads <- \"autosomal_chromosome_reads\"\nsex_chromosome_reads <- \"sex_chromosome_reads\"\ncorrection_status_autosomal_chromosomes <- \"correction_status_autosomal_chromosomes\"\ncorrection_status_sex_chromosomes <- \"correction_status_sex_chromosomes\"\nsample_name <- \"sample_name\"\nsamples <- \"samples\"\nsample_names <- \"sample_names\"\ndescription <- \"description\"\n\n\nn_total_chromosomes <- 24\nn_autosomal_chromosomes <- 22\nautosomal_chromosomes <- 1:22\nsex_chromosomes <- 23:24 \ncontrol_chromosomes <- as.character(c(1:12,14:17,19:20,22))\nchromosomes_trisomy <- c(13,18,21)\n\nn.models <- 4\nn.predictors <- 4\n\nbin_size <- 50000\n\n\nrownames_combined_autosomal <- as.character(autosomal_chromosomes)\nrownames_combined_sex <- XY\nrownames_separated_forward_autosomal <- paste0(autosomal_chromosomes, \"F\")\nrownames_separated_reverse_autosomal <- paste0(autosomal_chromosomes, \"R\")\nrownames_separated_forward_sex <- paste0(XY, \"F\")\nrownames_separated_reverse_sex <- paste0(XY, \"R\")\n\nNIPT_sample_class <- \"NIPTSample\"\nNCV_template_class <- \"NCVTemplate\"\nNCV_result_class <- \"NCVResult\"\nZ_template_class <- \"ZscoreResult\"\nRegressions_result_class <- \"RegressionResult\"\nNIPT_control_group_class <- \"NIPTControlGroup\"\n\n\n\n",
+    "created" : 1446200124578.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2757124801",
+    "id" : "41C7619A",
+    "lastKnownWriteTime" : 1446202106,
+    "path" : "~/NIPTeR/NIPTeR/R/constants.R",
+    "project_path" : "R/constants.R",
+    "properties" : {
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

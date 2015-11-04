@@ -1,0 +1,18 @@
+{
+    "contents" : "which(autosomal_38 > 22 & autosomal_38 < 23)\n\n\nmin(sex_38[sex_38 > 1])\nmax(sex_38)\nintervals <- seq(from = 32.7, to = 60.6, by =.1)\n\nsex_chromosome_indices_38 = list()\n\nfor (i in 1:length(intervals)){\n  \n sex_chromosome_indices_38[[i]] <- which(autosomal_38 > intervals[i] & autosomal_38 < intervals[i+1])\n}\n",
+    "created" : 1446218916243.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1847446153",
+    "id" : "12ABE4A9",
+    "lastKnownWriteTime" : 3690773765691896693,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled8"
+    },
+    "relative_order" : 17,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

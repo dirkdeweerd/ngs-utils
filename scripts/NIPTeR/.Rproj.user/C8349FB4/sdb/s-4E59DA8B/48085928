@@ -1,0 +1,18 @@
+{
+    "contents" : "testfun <- function(objectus)\n{\n  \n UseMethod(\"testfun\", objectus)\n}\n\ntestfun.RegressionResult <- function(objectus){\n  cat(\"dit is een\", class(objectus))\n}\ntestfun.ZscoreResult <- function(objectus){\n  cat(\"dit is een\", class(objectus))\n}\ntestfun.NCVResult <- function(objectus){\n  cat(\"dit is een\", class(objectus))\n}",
+    "created" : 1446124723735.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "4195190814",
+    "id" : "48085928",
+    "lastKnownWriteTime" : 7301549171650474533,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled4"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

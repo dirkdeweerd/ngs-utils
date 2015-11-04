@@ -1,0 +1,18 @@
+{
+    "contents" : "nums <- seq(from = -4.1, to= -3.9, by = .001)\n\nq1 <- function(x){\n  (4-sqrt((x+19))) / (x+3)\n}\n\nq2 <- function(x){\n  (x^2 + 9*x + 20) / (x^3 + 4*x^2)\n}\nq3 <- function(x){\n  (sqrt(4*x + 5) -sqrt(8*x+1) ) /( x^2 - 1)\n}\n\nq4 <- function(x,h){\n ( (x+h)^2 -x^2) / h\n}\nset.seed(1)\nmeans50 <- NULL\nfor (i in 1:1000){\n  means50[i] <- mean(sample(x = x, size = 50))\n}\n\nset.seed(1)\nmeans <- NULL\nfor (i in 1:10000){\n  means[i] <- mean(sample(x = x, size = 5))\n}",
+    "created" : 1446312106471.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3761444739",
+    "id" : "9F882640",
+    "lastKnownWriteTime" : 7163108469287182199,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled9"
+    },
+    "relative_order" : 18,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

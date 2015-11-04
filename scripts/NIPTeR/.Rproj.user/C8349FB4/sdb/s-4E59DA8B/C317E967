@@ -1,0 +1,18 @@
+{
+    "contents" : "#'Diagnose control group\n#'\n#'Compute a regular Z-score for every chromosome of every sample in a NIPTControlGroup object\n#'\n#'@param nipt_control_group The NIPTControlGroup object to diagnose\n#'\n#'@details This function computes a regular Z-score for every chromosome of\n#'every sample in a NIPTControlGroup object. It returns a named list with \n#'diagnostics information.\n#'\n#'The function returns a named list with 3 fields:\n#'\\itemize{\n#'\\item \\strong{Z_scores} A matrix containing Z-scores for every sample and every chromosome\n#'\\item \\strong{abberant_scores} Dataframe with samplename and chromosome of Z-scores outside -3  3 range \n#'\\item \\strong{control_group_statistics} Matrix with mean, standard deviation and P value of Shapiro-Wilk test\n#'}\n#'@return named list\n#'@export\ndiagnose_control_group <- function(nipt_control_group){\n  fracs <- sapply(nipt_control_group[[samples]], chrfractions)\n  control_group_scores <- t(apply(X = fracs, FUN = scale, MARGIN = 1))\n  colnames(control_group_scores) <- sapply(nipt_control_group[[samples]], getsamplenames)\n  control_group_scores <- setrownamesmatrix(control_group_scores)\n  a <- rbind(which(control_group_scores > 3, arr.ind = T), which(control_group_scores < -3, arr.ind = T))\n  abberants <- data.frame(t(apply(X = a, FUN = get_abberant_scores, score_matrix=control_group_scores, MARGIN = 1 )))\n  if (length(abberants) > 0){\n    rownames(abberants) <- NULL\n    colnames(abberants) <- c(\"Chromosome\", \"Sample_name\", \"Z_score\")\n  }\n  else{\n    abberants = NULL\n  }\n  statistics <- t(apply(control_group_scores, MARGIN = 1, FUN = get_mean_sd_shapiro))\n  statistics <- setrownamesmatrix(statistics)\n  \n  return(list(Z_scores = control_group_scores, abberant_scores = abberants, \n              control_group_statistics = statistics))\n  \n}\nget_abberant_scores <- function(row, score_matrix){\n  c(dimnames(score_matrix)[[1]][row[1]], dimnames(score_matrix)[[2]][row[2]], score_matrix[row[1], row[2]])\n}\nget_mean_sd_shapiro <- function(row){\n  c(mean = mean(row), SD = sd(row), Shapiro_P_value = shapiro.test(row)$p.value)\n}",
+    "created" : 1446123724146.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1699215629",
+    "id" : "C317E967",
+    "lastKnownWriteTime" : 1446124143,
+    "path" : "~/NIPTeR/NIPTeR/R/diagnose_control_group.R",
+    "project_path" : "R/diagnose_control_group.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,18 @@
+{
+    "contents" : "bin_size = 150000\n\ntestert <- bin_bam_sample(bam_filepath = \"/Users/dirkdeweerd/BAMS/Illumina_0495_Akonni_088_Exp1_S7_TTA.merged.dedup.bam\")",
+    "created" : 1446202158887.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1339219041",
+    "id" : "42AF2D8C",
+    "lastKnownWriteTime" : 399431958573,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled6"
+    },
+    "relative_order" : 13,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

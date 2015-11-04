@@ -1,0 +1,18 @@
+{
+    "contents" : "library(NIPTeR)\n#Gather all bam filepaths in a vector. Corresponds to 1a in figure\nbam_filepaths <- list.files(path = \"/Path/to/bamfiles/\", pattern = \".bam\", full.names = T)\n#Load all bam files using lapply and feed the results to function as_control_group,\n#converting the NIPTSamples to a NIPTControlGroup object. Corresponds to 1b in figure\ncontrol_group  <- as_control_group(nipt_samples = lapply(X = bam_filepaths, bin_bam_sample,\n                                                         do_sort = F, separate_strands = F))\n#apply a gc LOESS correction to all samples. Since this can take up to 30 seconds\n#sample, doing this once for a control group and store the results can be rewarding\n#in terms of analysis time. Corresponds to 2a in figure\ngc_control_group <- gc_correct(nipt_object = control_group, method = \"LOESS\")\n#Retrieve control group diagnostics. Corresponds with 3a in figure\ncontrol_group_diagnostics <- diagnose_control_group(nipt_control_group = control_group)\n#Retrieve samplenames with an abberant Z score for any chromosome and remove these samples \n#from the control group. Corresponds with 3b in figure\nabberant_sample_names <- unique(control_group_diagnostics$abberant_scores$Sample_name)\nfor (i in 1:length(abberant_sample_names)){\n  control_group <- remove_sample_controlgroup(samplename = abberant_sample_names[i], \n                                              nipt_control_group = control_group)\n}\n#Save the gc_corrected control groups to disk. Corresponds to 4a in figure\nsaveRDS(object = control_group, file = \"/path/to/controlgroup.rds\")\n",
+    "created" : 1446135317705.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3240231519",
+    "id" : "3998A625",
+    "lastKnownWriteTime" : 1446196384,
+    "path" : "~/control_group_wf.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled6"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

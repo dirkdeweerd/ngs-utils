@@ -1,0 +1,17 @@
+{
+    "contents" : "Package: NIPTeR\nType: Package\nEncoding: UTF-8\nTitle: R Package for Non-Invasive Prenatal Testing analysis\nVersion: 1.0\nDate: 2015-09-09\nAuthor: Dirk de Weerd\nMaintainer: Lennart Johansson <l.johansson@umcg.nl>\nDescription: Fast and accurate trisomy prediction in non-invasive prenatal testing.\nImports: Rsamtools, sets, S4Vectors\nDepends: R (>= 3.1.0)\nLicense: GNU Lesser General Public License\nSuggests: knitr, pander\nVignetteBuilder: knitr\n",
+    "created" : 1446195502806.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2999390312",
+    "id" : "3F1EE37D",
+    "lastKnownWriteTime" : 1446197928,
+    "path" : "~/NIPTeR/NIPTeR/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "type" : "dcf"
+}

@@ -1,0 +1,18 @@
+{
+    "contents" : "#'Perform a GC bias correction on nipt sample\n#'\n#'LOESS based GC bias correction algorithm described by Chen et al (2011)\n#'\n#'@param nipt_object The object that will be corrected. This can either be a \n#'`NIPTSample` or a `NIPTControlGroup` object\n#'@param method To select the LOESS based method use  \\emph{\"LOESS\"},  \n#'to select the bin weights based method use  \\emph{\"bin\"}. \n#'@param include_XY Also apply correction to X and Y chromosomes? \n#'@param span The span for the LOESS fit. Only applicable when LOESS method is used. \n#'@param ref_genome The reference genome used. Either \\emph{\"hg37\"} or \\emph{\"hg38\"}\n#'default = \\emph{\"hg37\"}\n#'@details\n#'GC content bias is the correlation between the number of reads mapped to a specific genomic \n#'region and the GC content of this region. In NIPTeR, two GC bias correction algorithms \n#'have been implemented, the LOESS based method introduced by Chen et al. (2011) and the bin \n#'weight based method described by Fan and Quake (2010). \n#'@return Depending on the input object either a NIPTSample or a NIPTControlGroup object \n#'\n#'@export\n#'\ngc_correct <- function(nipt_object, method = \"LOESS\", include_XY = F, span =0.75, \n                       ref_genome = \"hg37\"){\n  if(class(nipt_object)[1] == NIPT_sample_class){\n    if (method == loess){\n       return(corrected_sample <- gc_correct_NIPTSample_loess(nipt_object, span = 0.75, \n                                                              include_XY = include_XY, \n                                                              ref_genome = ref_genome))\n    }\n    if (method == bin){\n      \n      return(gc_correct_NIPTSample_bin(nipt_object, \n                                       include_XY = include_XY, ref_genome = ref_genome))\n    }\n    else{\n      stop(\"Error\")\n    }\n  }\n  if(class(nipt_object)[1] == NIPT_control_group_class){\n    if (method == loess){\n      return(gc_correct_NIPTControlGroup_loess(nipt_object, span = 0.75, include_XY = include_XY,\n                                               ref_genome = ref_genome))\n    }\n    if (method == bin){\n      return(gc_correct_NIPTControlGroup_bin(nipt_object, include_XY = include_XY,\n                                             ref_genome = ref_genome))\n    }\n    else{\n      stop(\"Error\")\n    }\n  }\n}",
+    "created" : 1446130425716.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2793374661",
+    "id" : "93D1EEEC",
+    "lastKnownWriteTime" : 1446222024,
+    "path" : "~/NIPTeR/NIPTeR/R/gc_correct.R",
+    "project_path" : "R/gc_correct.R",
+    "properties" : {
+        "tempName" : "Untitled6"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

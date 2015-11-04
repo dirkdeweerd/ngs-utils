@@ -1,0 +1,18 @@
+{
+    "contents" : "calculate_gc <- function(genomic_region, bin_size){\n  n_perc <- (genomic_region[5] / bin_size) * 100\n  if (n_perc >= 99){\n    gc_perc <- -1\n    return (gc_perc)\n  }\n  else{\n    gc_perc <- (sum(genomic_region[3:4])) / (bin_size - genomic_region[5]) * 100\n    return (gc_perc)\n  }\n  \n}\n\ndna_letters <- c(\"A\", \"T\", \"C\", \"G\", \"N\")\nbin_size = 50000\ngc_matrix <- NULL\n\ngc_percs_list <- list()\n\nchrs <- paste0(\"chr\", c(1:22, \"X\", \"Y\"))\n\nfor (i in 13:13){\n  \n  current_chr <- BSgenome.Hsapiens.UCSC.hg38@single_sequences[[chrs[i]]]\n  letter_matrix <-letterFrequencyInSlidingView(x = current_chr, view.width = bin_size, letters = dna_letters)\n  intervals <- seq(from = 1, to = length(current_chr)-bin_size, by = bin_size)\n  relevant_rows <- letter_matrix[intervals, ]\n  gc_percs_list[[i]] <- c(apply(X = relevant_rows, MARGIN = 1, FUN = calculate_gc, bin_size = bin_size), -1)\n  \n  \n}\n\nfor (p in 1:length(gc_percs_list)){\n  gc_bins <- gc_percs_list[[p]]\n  if (p == 1){\n    total_bins_length = length(gc_bins)\n  }\n  add_zero <- rep(x = 0, total_bins_length - length(gc_bins))\n  gc_matrix <- rbind(gc_matrix, c(gc_bins, add_zero ))\n}\n\n\n\n",
+    "created" : 1446210048731.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2535312782",
+    "id" : "72B3E1B3",
+    "lastKnownWriteTime" : 5063811796838645761,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled7"
+    },
+    "relative_order" : 15,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
